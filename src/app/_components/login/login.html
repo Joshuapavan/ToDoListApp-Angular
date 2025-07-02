@@ -1,0 +1,30 @@
+<div class="container pd-2" style="margin-top: 100px; width: 400px;">
+    <div class="d-flex flex-column justify-content-center">
+        <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Username*</span>
+                <input type="text" class="form-control" placeholder="Username" formControlName="username">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Password*</span>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <div class="text-center text text-danger">
+                <!-- <ul>
+                    <li>
+
+                    </li>
+                </ul> -->
+            </div>
+            <div class="btn-group justify-content-center">
+                <button class="btn-primary border" type="submit" [disabled]="loginForm.valid ? 'false' : 'true'">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p>
+    {{loginForm.value | json}}
+    <br>
+    {{loginForm.valid}}
+</p>
