@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../_models/User';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -15,12 +15,24 @@ export class Account {
 
   loginUser(model: any){
     return this.httpClient.post<User>( `${this.baseUrl}/accounts/login`,model).pipe(
-      map( user => {
+      tap( user => {
        if(user) {
          this.user.set(user);
+         localStorage.clear();
          localStorage.setItem("user",JSON.stringify(user));
        }
-       return user;
+      })
+    )
+  }
+
+  registerUser(model: any){
+    return this.httpClient.post<User>( `${this.baseUrl}/accounts/register`,model).pipe(
+      tap( user => {
+       if(user) {
+         this.user.set(user);
+         localStorage.clear();
+         localStorage.setItem("user",JSON.stringify(user));
+       }
       })
     )
   }
