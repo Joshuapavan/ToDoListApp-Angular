@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { loginService } from '../../_services/loginService'
+import { Account } from '../../_services/account';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { loginService } from '../../_services/loginService'
 })
 export class Login {
 
-  loginService = inject(loginService);
+  accountService = inject(Account);
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
@@ -19,7 +19,13 @@ export class Login {
   })
 
   loginUser(){
-    
+    this.accountService.loginUser(this.loginForm.value).subscribe(
+      {
+        next: (user) => {
+          console.log(`Welcome, ${user.username}`);
+        }
+      }
+    );
   }
 
 }
