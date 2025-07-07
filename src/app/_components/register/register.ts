@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Account } from '../../_services/account';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class Register {
   accountService = inject(Account);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   registerForm = new FormGroup(
     {
@@ -24,7 +25,10 @@ export class Register {
 
   registerUser(){
     this.accountService.registerUser(this.registerForm.value).subscribe({
-      next: user =>  this.toastr.info(`Welcome, ${user.username}!`),
+      next: user =>  {
+        this.toastr.info(`Welcome, ${user.username}!`);
+        this.router.navigateByUrl('/home');
+      },
       error: _ => this.toastr.error('ughh, something went wrong.')
     })
   }

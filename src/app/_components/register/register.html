@@ -12,7 +12,7 @@
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" >Confirm Password*</span>
-                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword">
             </div>
             <div class="text-center text text-danger">
                 <!-- <ul>
@@ -25,7 +25,7 @@
                 <button class="btn btn-primary border" type="submit" [disabled]="!registerForm.valid">Register</button>
             </div>
             <div class="mt-2 text-center">
-                <p>Have an existing account? <i class="text-primary" routerLink="/login">Login</i></p> 
+                <p>Have an existing account? <a id="link" class="text-primary" routerLink="/login">Login</a></p> 
             </div>
         </form>
     </div>

@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class Account {
-  user = signal<User | null>(null);
+  currentUser = signal<User | null>(null);
   baseUrl = environment.baseUrl;
 
   httpClient = inject(HttpClient);
@@ -17,7 +17,7 @@ export class Account {
     return this.httpClient.post<User>( `${this.baseUrl}/accounts/login`,model).pipe(
       tap( user => {
        if(user) {
-         this.user.set(user);
+         this.currentUser.set(user);
          localStorage.clear();
          localStorage.setItem("user",JSON.stringify(user));
        }
@@ -29,7 +29,7 @@ export class Account {
     return this.httpClient.post<User>( `${this.baseUrl}/accounts/register`,model).pipe(
       tap( user => {
        if(user) {
-         this.user.set(user);
+         this.currentUser.set(user);
          localStorage.clear();
          localStorage.setItem("user",JSON.stringify(user));
        }

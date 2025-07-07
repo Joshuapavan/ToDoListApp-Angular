@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+@if(accountService.currentUser()){
+    <app-navbar></app-navbar>
+    <div style="margin-top: 70px;">
+         <router-outlet></router-outlet>
+    </div>
+}@else{
+    <router-outlet></router-outlet>
+}
